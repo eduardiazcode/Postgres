@@ -28,3 +28,60 @@ VALUES (DEFAULT, 'Carlos', DEFAULT, DEFAULT);
 
 INSERT INTO students (first_name)
 VALUES ('Chayanne');
+
+-- Insertar varios datos
+-- 4. Insert into tabla VALUES (valorA1, ..., valorAn) (valorB1, ..., valorBN);
+INSERT INTO students
+VALUES
+(DEFAULT, 'Miriam', DEFAULT, DEFAULT),
+(DEFAULT, 'Carla', DEFAULT, DEFAULT),
+(DEFAULT, 'Alexia', DEFAULT, DEFAULT),
+(DEFAULT, 'Peter', DEFAULT, DEFAULT);
+
+INSERT INTO students (first_name, create_at_)
+VALUES
+('Michelle', '2022-08-15'),
+('Juan', '2022-11-02');
+
+INSERT INTO students (first_name, is_active, create_at_)
+VALUES
+('Pablo', False, '2023-03-24'),
+('Esperanza', False, '2024-04-12');
+
+-- Insertar datos provenientes de otra tabla
+-- 5. Insert into tabla SELECT your-query;
+CREATE TABLE tmp_student(
+    f_name VARCHAR(60),
+    active BOOLEAN
+);
+
+INSERT INTO tmp_student
+VALUES
+('Primer', TRUE),
+('Segundo', FALSE),
+('Tercero', TRUE),
+('Cuarto', TRUE);
+
+INSERT INTO students (first_name, is_active)
+SELECT f_name, active
+FROM tmp_student
+
+-- 6. Datos nulos
+DROP TABLE students;
+
+CREATE TABLE students(
+    id UUID DEFAULT gen_random_uuid() NOT NULL,
+    first_name VARCHAR(50) NOT NULL,
+    is_active   BOOLEAN NOT NULL,
+    create_at_ TIMESTAMP DEFAULT now() NOT NULL,
+    update_at TIMESTAMP
+);
+
+INSERT INTO students
+VALUES
+(DEFAULT, 'Pedro', True, DEFAULT, DEFAULT);
+
+-- No es posible porque viola las restricciones de nulo
+INSERT INTO students
+VALUES
+(NULL, NULL, NULL, NULL);
