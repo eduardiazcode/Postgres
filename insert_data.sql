@@ -82,6 +82,3 @@ VALUES
 (DEFAULT, 'Pedro', True, DEFAULT, DEFAULT);
 
 -- No es posible porque viola las restricciones de nulo
-INSERT INTO students
-VALUES
-(NULL, NULL, NULL, NULL);
