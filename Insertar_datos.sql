@@ -38,3 +38,43 @@ VALUES
 (DEFAULT, 'Shakira', DEFAULT, DEFAULT),
 (DEFAULT, 'Alberto', DEFAULT, DEFAULT),
 (DEFAULT, 'Sergio', DEFAULT, DEFAULT);
+
+-- Insertar datos en columnas en especifico
+INSERT INTO students (first_name, create_at)
+VALUES
+('Rodrigo', '2005-06-01'),
+('Michelle', '2003-02-21');
+
+-- Insertar datos desde una consulta
+-- 5. Insert into tabla SELECT your-query
+CREATE TABLE tmp_students (
+    f_name VARCHAR(50),
+    active BOOLEAN
+);
+
+INSERT INTO tmp_students
+VALUES
+('Primer', TRUE),
+('Segundo', FALSE),
+('Tercero', TRUE),
+('CUARTO', TRUE);
+
+INSERT INTO students(first_name, is_active)
+SELECT f_name, active
+FROM tmp_students;
+
+-- 6. Datos nulos
+INSERT INTO students VALUES (NULL, NULL, NULL, NULL);
+
+DROP TABLE students;
+
+CREATE TABLE students (
+    id UUID DEFAULT gen_random_uuid() NOT NULL,
+    first_name VARCHAR(50) NOT NULL,
+    is_active BOOLEAN NOT NULL,
+    create_at TIMESTAMP DEFAULT now() NOT NULL,
+    update_at TIMESTAMP
+);
+
+INSERT INTO students
+VALUES (DEFAULT, 'Joel', TRUE, DEFAULT, DEFAULT);
