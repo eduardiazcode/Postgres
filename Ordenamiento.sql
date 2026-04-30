@@ -5,7 +5,7 @@ SELECT * FROM persons;
 SELECT * FROM persons
 ORDER BY 2;
 
--- ORDER BY numero de campp descendente
+-- ORDER BY numero de campo descendente
 SELECT * FROM persons 
 ORDER BY 2 DESC;
 

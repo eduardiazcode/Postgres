@@ -81,3 +81,70 @@ VALUES
 -- Elimina filas duplicadas del resultado de la consulta, solo devuelve valores unicos
 SELECT DISTINCT last_name FROM persons;
 SELECT * FROM persons;
+
+-- 2. GROUP BY
+-- Debe contener los campos proyectados a excepcion de las funciones'
+-- Junta las filas que tienen algo en común y conviértelas en una sola fila con un resumen
+SELECT last_name
+FROM persons
+GROUP BY last_name;
+
+
+SELECT first_name, last_name
+FROM persons
+GROUP BY first_name, last_name;
+
+-- Consultados información con funciones
+SELECT first_name, COUNT(*) AS cantidad
+FROM persons
+GROUP BY first_name;
+
+SELECT COUNT(*)
+FROM persons;
+
+SELECT first_name, COUNT(1) AS cantidad
+FROM persons
+GROUP BY first_name;
+
+SELECT first_name, COUNT(last_name)
+FROM persons
+GROUP BY first_name;
+
+SELECT first_name, COUNT(update_at) AS cantidad
+FROM persons
+GROUP BY first_name;
+-- Aqui el resultado usando update_at me saldra cero porque al momento de registrar
+-- update_at tiene datos nulos, asi que por eso el resultado DE CANTIDAD saldra 0
+-- Mucho cuidado al tratar de buscasr informacion y insertar el nombre de la columna usando COUNT()
+
+-- Preguntas con SQL
+-- ¿Cual es el total de ventas de la primera factura?
+SELECT * FROM invoices;
+SELECT * FROM invoice_items;
+SELECT * FROM invoice_items WHERE invoice_id = 'd6d3d0f8-077f-4913-bdd5-36c70a50ee76';
+
+SELECT SUM(price * quantity) 
+FROM invoice_items WHERE invoice_id = 'd6d3d0f8-077f-4913-bdd5-36c70a50ee76';
+-- El total de la factura es 92.66
+
+--¿Cuanto es el total de todas las facturas, agrupado por factura?
+SELECT invoice_id, SUM(price * quantity)
+FROM invoice_items
+GROUP BY invoice_id;
+
+-- ¿Cuanto ha comprado el cliente Pedro Sanchez?
+SELECT * FROM invoices WHERE person_id = '8bed3dee-8804-47fa-9eed-e512f43c6ee4';
+SELECT SUM(price * quantity)
+FROM invoice_items WHERE invoice_id = 'd6d3d0f8-077f-4913-bdd5-36c70a50ee76';
+
+-- ¿Cuanto ha comprado el cliente Albertano Santa Cruz?
+SELECT * FROM invoices WHERE person_id = 'a5fc7744-5fb4-4f2e-88ef-5aec80a3f309';
+SELECT SUM(price * quantity)
+FROM invoice_items WHERE invoice_id = 'a9347d08-8520-4aa1-b07e-742f05c8d92c';
+
+-- ¿Cual producto se ha vendido mas/menos en cantidad?
+SELECT * FROM invoice_items;
+SELECT product_id, SUM(quantity) AS cantidad, SUM(price * quantity) AS ganancia
+FROM invoice_items
+GROUP BY product_id
+ORDER BY 2;
