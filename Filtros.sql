@@ -30,7 +30,7 @@ SELECT * FROM persons WHERE length(first_name) <> 5;
 
 -- 3. AND & OR
 SELECT * FROM persons WHERE upper(first_name) = 'Alejandro' OR last_name <> 'De la Vega';
-SELECT * FROM persons WHERE upper(first_name) = 'ALEJANDRO' OR last_name = 'Albertano';
+SELECT * FROM persons WHERE upper(first_name) = 'ALEJANDRO' OR first_name = 'Albertano';
 SELECT * FROM persons WHERE upper(first_name) = 'ALEJANDRO' AND last_name = 'Perez';
 
 -- 4. LIKE normal
