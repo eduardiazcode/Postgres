@@ -36,11 +36,35 @@ INNER JOIN invoices ON
     WHERE persons.first_name = 'Alejandro';
 
 
-
 -- LEFT JOIN (A -B)
 -- Combina filas de dos o más tablas basándose en una columna que tienen en común.
 
+-- Mostrar todos nuestros usuarios asi no hayan comprado
+SELECT first_name, last_name, invoice_date
+FROM persons LEFT JOIN invoices
+ON persons.id = invoices.person_id;
+
+SELECT * FROM persons;
+SELECT * FROM invoices;
+
+
 -- RIGHT JOIN (B - A)
 -- Combina filas de dos o más tablas basándose en una columna que tienen en común.
+SELECT first_name, last_name, invoice_date
+FROM invoices RIGHT JOIN persons
+ON invoices.person_id = persons.id;
 
--- FULL OUTER JOIN (A U B)
+
+-- FULL JOIN (A U B)
+SELECT * FROM alpha;
+SELECT * FROM gamma;
+
+INSERT INTO gamma
+VALUES
+(5, 'FIVE'),
+(6, 'SIX'),
+(7, 'SEVEN');
+
+SELECT * FROM
+alpha FULL JOIN gamma
+ON alpha.id = gamma.id;
